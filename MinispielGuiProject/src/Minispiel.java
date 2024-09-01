@@ -1,8 +1,10 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -11,49 +13,39 @@ import javafx.stage.Stage;
 
 public class Minispiel extends Application {
 	
-	Label initLabel;
-	
-	TextField input;
-	
-	Button displayBtn;
+	Label colorLabel;
 	
 	VBox root;
-	
 	Scene scene;
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		
+		colorLabel = new Label("Selected Color: ");
 		
-		initLabel = new Label("Results will be shown here");
+		ChoiceBox<String> choice = new ChoiceBox<>(
+				FXCollections.observableArrayList(
+						"Red", "Green", "Blue", "Yellow", "Orange", "Purple"
+						)
+				);
 		
-		input = new TextField();
-		displayBtn = new Button("Display Text.");
-		
-		displayBtn.setOnAction(event -> {
-			String result = input.getText();
-			initLabel.setText("Entered Text: " + result);
+		choice.setOnAction(event -> {
+			String selectedColor = choice.getValue();
+			colorLabel.setText("Selected Color: " + selectedColor);
 		});
 		
 		root = new VBox(10);
-		root.getChildren().addAll(input, displayBtn, initLabel);
+		root.getChildren().addAll(choice, colorLabel);
 		
-		scene = new Scene(root, 300, 200);
-		
+		scene = new Scene(root, 450, 300);
 		stage.setScene(scene);
-		stage.setTitle("Text Input");
+		stage.setTitle("Color Choice App");
 		stage.show();
 		
 		
 	}
 	
-	private void showDisplay(String action, String content) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(action);
-		alert.setHeaderText(null);
-		alert.setContentText(content);
-		alert.showAndWait();
-	}
+	
 	
 	
 	public static void main(String[] args) {
