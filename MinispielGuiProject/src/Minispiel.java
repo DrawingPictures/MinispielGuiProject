@@ -11,54 +11,39 @@ import javafx.stage.Stage;
 
 public class Minispiel extends Application {
 	
-	private Label nameLabel;
-	private Label ageLabel;
+	Label initLabel;
 	
-	private TextField nameField;
-	private TextField ageField;
+	TextField input;
 	
+	Button displayBtn;
 	
-	private Button submitBtn;
-	private Button clearBtn;
+	VBox root;
 	
-	private VBox root;
-	
-	private Scene scene;
+	Scene scene;
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		
 		
-		nameLabel = new Label("Name: ");
-		nameField = new TextField();
+		initLabel = new Label("Results will be shown here");
 		
-		ageLabel = new Label("Age: ");
-		ageField = new TextField();
+		input = new TextField();
+		displayBtn = new Button("Display Text.");
 		
-		submitBtn = new Button("Submit");
-		clearBtn = new Button("Clear");
+		displayBtn.setOnAction(event -> {
+			String result = input.getText();
+			initLabel.setText("Entered Text: " + result);
+		});
 		
 		root = new VBox(10);
-		root.getChildren().addAll(nameLabel, ageLabel, nameField, ageField, submitBtn, clearBtn);
-		
-		submitBtn.setOnAction(event -> {
-			String name = nameField.getText();
-			String age = ageField.getText();
-			showDisplay("Information", "Name: " + name + "\nAge: " + age);
-		});
-		
-		//Reinigt den Textfeld wenn man auf den "Clear"-Knopf drückt
-		clearBtn.setOnAction(event -> {
-			nameField.clear();
-			ageField.clear();
-		});
-		
+		root.getChildren().addAll(input, displayBtn, initLabel);
 		
 		scene = new Scene(root, 300, 200);
-		stage.setScene(scene);
 		
-		stage.setTitle("Minispiel");
+		stage.setScene(scene);
+		stage.setTitle("Text Input");
 		stage.show();
+		
 		
 	}
 	
