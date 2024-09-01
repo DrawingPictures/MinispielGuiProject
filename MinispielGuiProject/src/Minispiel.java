@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import java.io.FileInputStream;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -7,37 +8,32 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Minispiel extends Application {
 	
-	Label colorLabel;
-	
-	VBox root;
+	Image image;
+	ImageView view;
+	StackPane pane; 
 	Scene scene;
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		colorLabel = new Label("Selected Color: ");
+		FileInputStream inputStream = new FileInputStream("C:\\Users\\m-sul\\OneDrive\\Desktop\\Java Projekte\\Images\\6d7a8f2b02f6fcee5a3a09a9d0b6740c.png");
+		image = new Image(inputStream);
 		
-		ChoiceBox<String> choice = new ChoiceBox<>(
-				FXCollections.observableArrayList(
-						"Red", "Green", "Blue", "Yellow", "Orange", "Purple"
-						)
-				);
+		view = new ImageView(image);
 		
-		choice.setOnAction(event -> {
-			String selectedColor = choice.getValue();
-			colorLabel.setText("Selected Color: " + selectedColor);
-		});
+		pane = new StackPane();
+		pane.getChildren().add(view);
 		
-		root = new VBox(10);
-		root.getChildren().addAll(choice, colorLabel);
-		
-		scene = new Scene(root, 450, 300);
+		scene = new Scene(pane, 800, 600);
 		stage.setScene(scene);
 		stage.setTitle("Color Choice App");
 		stage.show();
