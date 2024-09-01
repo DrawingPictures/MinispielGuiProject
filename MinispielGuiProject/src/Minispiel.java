@@ -3,7 +3,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Minispiel extends Application {
 	
 	Label label;
 	Label secondLabel;
