@@ -11,12 +11,10 @@ import javafx.stage.Stage;
 public class Minispiel extends Application {
 	
 	private Label label;
-	private Label secondLabel;
-	private Label thirdLabel;
+	
 	
 	private Button button1;
-	private Button button2;
-	private Button button3;
+	
 	
 	private GridPane gp;
 	
@@ -30,19 +28,12 @@ public class Minispiel extends Application {
 		label = new Label("Minispiel");
 		
 		button1 = new Button("Click Me.");
-		button2 = new Button("Klicke auf mich!");
-		button3 = new Button("Klicke NICHT auf mich!");
+		
 		
 		button1.setOnAction(event -> {
-			button1.setText("Du hast auf den Knopf gedrückt!");
-		});
-		
-		button2.setOnAction(event -> {
-			button2.setText("Du hast auf den zweiten Knopf gedrückt!");
-		});
-		
-		button3.setOnAction(event -> {
-			button3.setText("Du solltest nicht auf den Knopf drücken!");
+			
+			//Hilfsmethode
+			showAlert("Knopf gedrückt!", "Du hast auf den Knopf gedrückt");
 		});
 		
 		root = new VBox(10);
@@ -57,6 +48,7 @@ public class Minispiel extends Application {
 		
 	}
 	
+	//Implementierung der Hilfsmethode
 	private void showAlert(String title, String content) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(title);
